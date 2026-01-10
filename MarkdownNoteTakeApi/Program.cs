@@ -1,8 +1,19 @@
+using MarkdownNoteTakeApi.Data;
+using MarkdownNoteTakeApi.Repositories;
+using MarkdownNoteTakeApi.Services.Implementations;
+using MarkdownNoteTakeApi.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite(connectionString));
+    
+builder.Services.AddScoped<INoteRepository, NoteRepository>();
+builder.Services.AddScoped<INoteService, NoteService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
