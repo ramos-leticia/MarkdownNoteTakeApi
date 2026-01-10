@@ -46,7 +46,7 @@ O foco principal deste projeto foi a aplicação de **Clean Code** e boas práti
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/seu-usuario/markdown-note-api.git](https://github.com/seu-usuario/markdown-note-api.git)
+    git clone https://github.com/ramos-leticia/MarkdownNoteTakeApi.git
     cd markdown-note-api
     ```
 
@@ -111,7 +111,7 @@ The main goal was to apply **Clean Code** principles and architectural best prac
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/your-username/markdown-note-api.git](https://github.com/your-username/markdown-note-api.git)
+    git clone https://github.com/ramos-leticia/MarkdownNoteTakeApi.git
     cd markdown-note-api
     ```
 
