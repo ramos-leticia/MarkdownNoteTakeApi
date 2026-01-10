@@ -2,8 +2,8 @@
 {
     public record GrammarErrorDto(
         string Message,
+        string ShortMessage,
         string Suggestion,
-        int Line,
         int Column
     );
 }
