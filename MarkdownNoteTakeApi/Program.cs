@@ -2,7 +2,9 @@ using MarkdownNoteTakeApi.Data;
 using MarkdownNoteTakeApi.Repositories;
 using MarkdownNoteTakeApi.Services.Implementations;
 using MarkdownNoteTakeApi.Services.Interfaces;
+using MarkdownNoteTakeApi.Services.RestEase;
 using Microsoft.EntityFrameworkCore;
+using RestEase.HttpClientFactory;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +13,14 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(connectionString));
-    
+var languageToolUrl = builder.Configuration.GetValue<string>("LanguageToolApi:BaseUrl");
+builder.Services.AddRestEaseClient<ILanguageToolClient>(languageToolUrl)
+    .ConfigureHttpClient(c =>
+    {
+        // Configurações opcionais de timeout, headers, etc.
+        c.Timeout = TimeSpan.FromSeconds(10);
+    });
+
 builder.Services.AddScoped<INoteRepository, NoteRepository>();
 builder.Services.AddScoped<INoteService, NoteService>();
 
