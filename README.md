@@ -16,7 +16,7 @@ Ele foi desenvolvido como solução para o desafio **[Markdown Note-taking App](
 
 ### 🚀 Funcionalidades
 * **Upload de Arquivos:** Envio de arquivos `.md` que são processados e salvos no banco de dados.
-* **Renderização HTML:** Conversão automática de Markdown para HTML seguro usando **Markdig**.
+* **Renderização HTML:** Conversão automática de Markdown para HTML seguro usando **Markdig** e **HtmlSanitizer**.
 * **Verificação Gramatical:** Integração com a API do **[LanguageTool](https://dev.languagetool.org/public-http-api.html)** para identificar erros de escrita.
 * **Gerenciamento (CRUD):** Criação, leitura e listagem de notas.
 
@@ -33,7 +33,7 @@ O foco principal deste projeto foi a aplicação de **Clean Code** e boas práti
 ### 🛠️ Tecnologias Utilizadas
 * **Core:** ASP.NET Core 9 (Web API)
 * **Banco de Dados:** SQLite com Entity Framework Core
-* **Markdown:** Markdig
+* **Markdown:** Markdig e HtmlSanitizer
 * **Integrações:** RestEase (LanguageTool API)
 * **Documentação:** Scalar / OpenAPI
 
@@ -81,7 +81,7 @@ It was built as a solution for the **[Markdown Note-taking App](https://roadmap.
 
 ### 🚀 Features
 * **File Upload:** Upload `.md` files which are parsed and stored in the database.
-* **HTML Rendering:** Automatic conversion from Markdown to secure HTML using **Markdig**.
+* **HTML Rendering:** Automatic conversion from Markdown to secure HTML using **Markdig** and **HtmlSanitizer**.
 * **Grammar Check:** Integration with the **[LanguageTool](https://dev.languagetool.org/public-http-api.html)** to detect writing errors in real-time.
 * **Management (CRUD):** Create, read, and list notes.
 
@@ -98,7 +98,7 @@ The main goal was to apply **Clean Code** principles and architectural best prac
 ### 🛠️ Tech Stack
 * **Core:** ASP.NET Core 9 (Web API)
 * **Database:** SQLite with Entity Framework Core
-* **Markdown:** Markdig
+* **Markdown:** Markdig and HtmlSanitizer
 * **Integrations:** RestEase (LanguageTool API)
 * **Documentation:** Scalar / OpenAPI
 
