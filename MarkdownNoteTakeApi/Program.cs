@@ -1,3 +1,4 @@
+using Ganss.Xss;
 using MarkdownNoteTakeApi.Data;
 using MarkdownNoteTakeApi.Repositories;
 using MarkdownNoteTakeApi.Services.Implementations;
@@ -13,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(connectionString));
+
 var languageToolUrl = builder.Configuration.GetValue<string>("LanguageToolApi:BaseUrl");
 builder.Services.AddRestEaseClient<ILanguageToolClient>(languageToolUrl)
     .ConfigureHttpClient(c =>
@@ -21,6 +23,7 @@ builder.Services.AddRestEaseClient<ILanguageToolClient>(languageToolUrl)
         c.Timeout = TimeSpan.FromSeconds(10);
     });
 
+builder.Services.AddSingleton<HtmlSanitizer>(new HtmlSanitizer());
 builder.Services.AddScoped<INoteRepository, NoteRepository>();
 builder.Services.AddScoped<INoteService, NoteService>();
 
