@@ -1,4 +1,5 @@
-﻿using Markdig;
+﻿using Ganss.Xss;
+using Markdig;
 using MarkdownNoteTakeApi.Models;
 using MarkdownNoteTakeApi.Models.DTOs;
 using MarkdownNoteTakeApi.Repositories;
@@ -11,11 +12,13 @@ namespace MarkdownNoteTakeApi.Services.Implementations
     {
         private readonly INoteRepository _repository;
         private readonly ILanguageToolClient _languageToolClient;
+        private readonly HtmlSanitizer _sanitizer;
 
-        public NoteService(INoteRepository repository, ILanguageToolClient languageToolClient)
+        public NoteService(INoteRepository repository, ILanguageToolClient languageToolClient, HtmlSanitizer sanitizer)
         {
             _repository = repository;
             _languageToolClient = languageToolClient;
+            _sanitizer = sanitizer;
         }
 
         public async Task<GrammarCheckResponseDto> CheckGrammarAsync(string text)
@@ -84,9 +87,11 @@ namespace MarkdownNoteTakeApi.Services.Implementations
         public async Task<string?> GetRenderedHtmlAsync(Guid id)
         {
             var note = await _repository.GetByIdAsync(id);
-            if (note is null) return null;
+            if (note == null) return null;
 
-            return Markdown.ToHtml(note.RawContent);
+            string unsanitizedHtml = Markdown.ToHtml(note.RawContent);
+
+            return _sanitizer.Sanitize(unsanitizedHtml);
         }
 
         public async Task<NoteReadDto> UploadNoteAsync(IFormFile file)
